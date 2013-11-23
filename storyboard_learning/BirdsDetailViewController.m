@@ -7,6 +7,7 @@
 //
 
 #import "BirdsDetailViewController.h"
+#import "BirdSighting.h"
 
 @interface BirdsDetailViewController ()
 - (void)configureView;
@@ -16,22 +17,27 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setSighting:(BirdSighting *)sighting
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
+    if (_sighting != sighting) {
+        _sighting = sighting;
         [self configureView];
     }
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    BirdSighting *theSighting = self.sighting;
+    static NSDateFormatter *formatter = nil;
+    if (formatter == nil) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+    }
+    
+    if (theSighting != nil) {
+        self.birdNameLabel.text = theSighting.name;
+        self.locationLabel.text = theSighting.location;
+        self.dateLabel.text = [formatter stringFromDate:(NSDate *)theSighting.date];
     }
 }
 

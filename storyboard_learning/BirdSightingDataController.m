@@ -39,7 +39,7 @@
 - (void)setMasterBirdSightingList:(NSMutableArray *)masterBirdSightingList
 {
     if (_masterBirdSightingList != masterBirdSightingList) {
-        _masterBirdSightingList = [masterBirdSightingList copy];
+        _masterBirdSightingList = [masterBirdSightingList mutableCopy];
     }
 }
 

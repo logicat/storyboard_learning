@@ -10,6 +10,7 @@
 #import "BirdSightingDataController.h"
 #import "BirdsDetailViewController.h"
 #import "BirdSighting.h"
+#import "AddSightingViewController.h"
 
 @interface BirdsMasterViewController ()
 
@@ -78,6 +79,25 @@
         BirdsDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.sighting = [self.dataController objectInListAtIndex:[self.tableView indexPathForSelectedRow].row];
 
+    }
+}
+
+- (IBAction)done:(UIStoryboardSegue *)segue
+{
+    if ([[segue identifier] isEqualToString:@"ReturnInput"]) {
+        AddSightingViewController *addController = [segue sourceViewController];
+        if (addController.birdSighting != nil) {
+            [self.dataController addBirdSightingWithSighting:addController.birdSighting];
+            [self.tableView reloadData];
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (IBAction)cancel:(UIStoryboardSegue *)segue
+{
+    if ([[segue identifier] isEqualToString:@"CancelInput"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

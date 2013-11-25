@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem.accessibilityHint = @"Add a new bird-sighting event";
 }
 
 - (void)didReceiveMemoryWarning
